@@ -70,12 +70,17 @@ def gradient_ascent(
         # Update location
         loc = delta + loc
 
+        # Evaluated center
+        eval_ = sum_of_gauss.Eval(loc)
+
         # Log location
         if not print_last_only:
-            print(loc, delta)
+            print(*loc, eval_)
 
-        # Check to see if absolute change is <= delta threshold
-        if abs(delta) <= delta_threshold:
+        # Check to see if the mean absolute change is <= delta threshold...
+        # considers all dimensions because the change in all dimensions
+        # should be very small to indicate convergence
+        if np.mean(np.absolute(delta)) <= delta_threshold:
             ascend = False
 
         # Update loop counter
@@ -83,7 +88,7 @@ def gradient_ascent(
 
     # Log last update location
     if print_last_only:
-        print(loc, delta)
+        print(*loc, eval_)
 
 
 def cli(description):
