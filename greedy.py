@@ -1,4 +1,4 @@
-""" 
+"""
 Author: Jared Frazier
 Project: OLA 2
 File: greedy.py
@@ -42,12 +42,12 @@ def gradient_ascent(
         loc,
         sum_of_gauss,
         iter_threshold=100000, delta_threshold=1e-8, step_size=0.01,
-        print_last_only=True):
+        print_last_only=False, print_total_iterations=False):
     """Performs gradient ascent.
 
-    :param loc: <class 'numpy.ndarray'> Location of point in 
+    :param loc: <class 'numpy.ndarray'> Location of point in
         d-dimensional space.
-    :param sum_of_gauss: <class 'SumOfGaussians'> object for 
+    :param sum_of_gauss: <class 'SumOfGaussians'> object for
         calculating derivative at a given location.
     :param iter_threshold: <lcass 'int'> Max number of iterations
         before termination of loop.
@@ -55,8 +55,9 @@ def gradient_ascent(
         current location.
     :param step_size: <class 'float'>
     :param print_last_only: <class 'bool'>
+    :param print_total_iterations: <class 'bool'>
 
-    :return: None
+    :return: <class 'int'> The number of iterations for until convergence.
     """
 
     ascend = True
@@ -90,6 +91,10 @@ def gradient_ascent(
     if print_last_only:
         print(*loc, eval_)
 
+    # Log Iterations
+    if print_total_iterations:
+        print(iteration)
+
 
 def cli(description):
     """Command line interface for module."""
@@ -108,7 +113,6 @@ def cli(description):
         type=int,
         default=3)
 
-    # What is this for??
     parser.add_argument(
         'n_gaussians',
         help='number of gaussians. (default: 1)',
@@ -116,9 +120,22 @@ def cli(description):
         default=1)
 
     parser.add_argument(
+        '--step_size',
+        help='step size for gradient ascent. (default: 0.01)',
+        type=float,
+        default=0.01)
+
+    parser.add_argument(
         '--print_last_only',
         choices=['True', 'False'],
         help='for logging gradient ascent output. (default: False)',
+        type=str,
+        default='False')
+
+    parser.add_argument(
+        '--print_total_iterations',
+        choices=['True', 'False'],
+        help='for logging total number of iterations. (default: False)',
         type=str,
         default='False')
 
@@ -128,11 +145,10 @@ def cli(description):
 def main():
 
     # CLI
-    parser = cli('gradient ascent')
+    parser = cli('gradient ascent script')
     args = parser.parse_args()
 
-    # Random vector in range 10
-    # (though this could be changed if desired)
+    # Random vector in default range of 10
     rand_vector = random_location(
         seed=args.seed,
         d_dimensions=args.d_dimensions)
@@ -143,8 +159,12 @@ def main():
         number_of_centers=args.n_gaussians)
 
     # Perform gradient ascent
-    gradient_ascent(rand_vector, sog,
-                    print_last_only=bool(strtobool(args.print_last_only)))
+    gradient_ascent(
+        rand_vector, sog,
+        step_size=args.step_size,
+        print_last_only=bool(strtobool(args.print_last_only)),
+        print_total_iterations=bool(
+            strtobool(args.print_total_iterations))),
 
 
 if __name__ == '__main__':
