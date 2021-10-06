@@ -12,16 +12,29 @@ import numpy as np
 import SumofGaussians
 
 
-def random_location(seed, d_dimensions, n_gaussians):
+def random_location(seed, d_dimensions, in_range=10):
     """Generate a random location in a D-dimensional cube.
 
     :param seed: <class 'int'>
     :param d_dimensions: <class 'int'>
     :param n_gaussians: <clas 'int'>
+    :param in_range: <class 'int'> Multiplied by random uniform vector
+        to get vector in certain range.
 
     :return: <class 'numpy.ndarray'>
     """
-    pass
+
+    # Set the seed
+    np.random.seed(seed)
+
+    # Vector containing random values in [0, 1]
+    rand_uniform_vector = np.random.rand(d_dimensions)
+
+    # Multiply each ele of uniform vector
+    rand_vector_in_range = rand_uniform_vector * in_range
+
+    # Return D-dimensional vector in the specified range
+    return rand_vector_in_range
 
 
 def gradient_ascent(
