@@ -90,13 +90,12 @@ def gradient_ascent(
         # Update loop counter
         iteration += 1
 
-    # Log last update location
+    # Logging
     if print_last_only:
         print(*loc, eval_)
 
-    # Log Iterations
-    if print_total_iterations:
-        print(iteration)
+    if print_last_only and print_total_iterations:
+        print(*loc, eval_, iteration)
 
 
 def cli(description):
