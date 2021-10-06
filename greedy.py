@@ -91,10 +91,10 @@ def gradient_ascent(
         iteration += 1
 
     # Logging
-    if print_last_only:
+    if print_last_only and not print_total_iterations:
         print(*loc, eval_)
 
-    if print_last_only and print_total_iterations:
+    elif print_last_only and print_total_iterations:
         print(*loc, eval_, iteration)
 
 
