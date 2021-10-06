@@ -9,10 +9,26 @@ Description: Module for performing simulated annealing.
 
 """
 
+import numpy as np
+from greedy import random_location, cli
+from SumofGaussians import SumofGaussians
+
+
+def annealing_schedule():
+    """Create an annealing schedule."""
+
+    pass
+
+
+def simulated_annealing():
+    """Perform simulated annealing."""
+
+    pass
+
 
 def main():
 
-    # CLI .. same as prev
+    # CLI .. same as pre
     pass
 
 

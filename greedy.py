@@ -121,25 +121,33 @@ def cli(description):
         type=int,
         default=1)
 
-    parser.add_argument(
+    logging = parser.add_argument_group(
+        'logging',
+        'params for logging outputs.')
+
+    logging.add_argument(
+        '--print_last_only',
+        choices=['True', 'False'],
+        help='true to log gradient ascent output at last step, false to log at all steps. (default: False)',
+        type=str,
+        default='False')
+
+    logging.add_argument(
+        '--print_total_iterations',
+        choices=['True', 'False'],
+        help='true to log total number of iterations, false otherwise. (default: False)',
+        type=str,
+        default='False')
+
+    greedy = parser.add_argument_group(
+        'greedy',
+        'params for greedy local search only.')
+
+    greedy.add_argument(
         '--step_size',
         help='step size for gradient ascent. (default: 0.01)',
         type=float,
         default=0.01)
-
-    parser.add_argument(
-        '--print_last_only',
-        choices=['True', 'False'],
-        help='for logging gradient ascent output. (default: False)',
-        type=str,
-        default='False')
-
-    parser.add_argument(
-        '--print_total_iterations',
-        choices=['True', 'False'],
-        help='for logging total number of iterations. (default: False)',
-        type=str,
-        default='False')
 
     return parser
 
