@@ -10,7 +10,7 @@ Description: Module for performing gradient ascent.
 import argparse
 from distutils.util import strtobool
 import numpy as np
-import SumofGaussians
+from SumofGaussians import SumofGaussians
 
 
 def random_location(seed, d_dimensions, in_range=10):
