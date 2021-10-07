@@ -45,7 +45,7 @@ def gradient_ascent(
         loc,
         sum_of_gauss,
         iter_threshold=100000, delta_threshold=1e-8, step_size=0.01,
-        print_last_only=False, print_total_iterations=False):
+        print_last_only=False):
     """Performs gradient ascent.
 
     :param loc: <class 'numpy.ndarray'> Location of point in
@@ -58,7 +58,6 @@ def gradient_ascent(
         current location.
     :param step_size: <class 'float'>
     :param print_last_only: <class 'bool'>
-    :param print_total_iterations: <class 'bool'>
 
     :return: None
     """
@@ -176,9 +175,7 @@ def main():
         rand_vector, sog,
         step_size=args.step_size,
         iter_threshold=args.iter_threshold,
-        print_last_only=bool(strtobool(args.print_last_only)),
-        print_total_iterations=bool(
-            strtobool(args.print_total_iterations))),
+        print_last_only=bool(strtobool(args.print_last_only)))
 
 
 if __name__ == '__main__':

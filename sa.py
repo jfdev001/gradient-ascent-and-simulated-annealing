@@ -42,7 +42,7 @@ def simulated_annealing(
         loc,
         sum_of_gauss,
         iter_threshold=100000, delta_threshold=1e-8,
-        print_last_only=False, print_total_iterations=False):
+        print_last_only=False):
     """Perform simulated annealing.
 
 
@@ -56,7 +56,6 @@ def simulated_annealing(
         current location.
     :param step_size: <class 'float'>
     :param print_last_only: <class 'bool'>
-    :param print_total_iterations: <class 'bool'>
 
     :return: None
     """
@@ -130,9 +129,7 @@ def main():
     # Perform gradient ascent
     simulated_annealing(
         rand_vector, sog, iter_threshold=args.iter_threshold,
-        print_last_only=bool(strtobool(args.print_last_only)),
-        print_total_iterations=bool(
-            strtobool(args.print_total_iterations))),
+        print_last_only=bool(strtobool(args.print_last_only)))
 
 
 if __name__ == '__main__':
