@@ -7,7 +7,7 @@ Instructor: Dr. Joshua Phillips
 Description: Module for performing gradient ascent.
 
 Bash command for getting 1600 data items (16 arg combos * 100 random seeds):
-for ((i=0; i<100; i++)); do while read line; do python greedy.py $i $line --print_last_only True --print_total_iterations True; done < combos.txt >> ${i}_out.txt; done | xargs -L 1 -I CMD -P 16 bash -c CMD 
+for ((i=0; i<100; i++)); do while read line; do python greedy.py $i $line --print_last_only True --print_total_iterations True; done < combos.txt >> ${i}_out.txt; done | xargs -L 1 -I CMD -P 16 bash -c CMD
 """
 
 import argparse
@@ -79,7 +79,10 @@ def gradient_ascent(
 
         # Log location
         if not print_last_only:
-            print(*loc, eval_)
+            if isinstance(loc, np.ndarray):
+                print(*loc, eval_)
+            else:
+                print(loc, eval_)
 
         # Check to see if the mean absolute change is <= delta threshold...
         # considers all dimensions because the change in all dimensions
@@ -91,11 +94,11 @@ def gradient_ascent(
         iteration += 1
 
     # Logging
-    if print_last_only and not print_total_iterations:
-        print(*loc, eval_)
-
-    elif print_last_only and print_total_iterations:
-        print(*loc, eval_, iteration)
+    if print_last_only:
+        if isinstance(loc, np.ndarray):
+            print(*loc, eval_, iteration)
+        else:
+            print(loc, eval_, iteration)
 
 
 def cli(description):
@@ -134,14 +137,8 @@ def cli(description):
     logging.add_argument(
         '--print_last_only',
         choices=['True', 'False'],
-        help='true to log gradient ascent output at last step, false to log at all steps. (default: False)',
-        type=str,
-        default='False')
-
-    logging.add_argument(
-        '--print_total_iterations',
-        choices=['True', 'False'],
-        help='true to log total number of iterations, false otherwise. (default: False)',
+        help='true to log optimization output at last step and iterations, \
+            false to log position only at all steps. (default: False)',
         type=str,
         default='False')
 

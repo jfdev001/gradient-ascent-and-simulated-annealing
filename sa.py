@@ -95,7 +95,10 @@ def simulated_annealing(
 
         # Log location and the energy at the state
         if not print_last_only:
-            print(*loc, loc_energy)
+            if isinstance(loc, np.ndarray):
+                print(*loc, loc_energy)
+            else:
+                print(loc, loc_energy)
 
         # Update iterations
         iteration += 1
