@@ -60,7 +60,7 @@ def gradient_ascent(
     :param print_last_only: <class 'bool'>
     :param print_total_iterations: <class 'bool'>
 
-    :return: <class 'int'> The number of iterations for until convergence.
+    :return: None
     """
 
     ascend = True
