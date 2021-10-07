@@ -70,14 +70,19 @@ def simulated_annealing(
         # Determine candidate move
         candidate_loc = loc + np.random.choice((-0.05, 0.05))
 
-        # Edge cases
-        if candidate_loc > 10:
-            candidate_loc = 10
+        # Edge cases -- sets dim with out of bound step to max or min
+        # in range
+        if np.greater(candidate_loc, 10).any():
+            greater_bool_arr = np.greater(candidate_loc, 10)
+            greater_ix_arr = np.where(greater_bool_arr)
+            candidate_loc[greater_ix_arr] = 10
 
-        elif candidate_loc < 0:
-            candidate_loc = 0
+        elif np.less(candidate_loc, 0).any():
+            less_bool_arr = np.less(candidate_loc, 0)
+            less_ix_arr = np.where(less_bool_arr)
+            candidate_loc[less_ix_arr] = 0
 
-        # Calculate energies of states
+        # Calculate energies of states -- scalars
         candidate_energy = sum_of_gauss.Eval(candidate_loc)
         loc_energy = sum_of_gauss.Eval(loc)
 
@@ -97,7 +102,10 @@ def simulated_annealing(
 
     # Log location and the energy at the state of last only with iterations
     if print_last_only:
-        print(*loc, loc_energy, iteration)
+        if isinstance(loc, np.ndarray):
+            print(*loc, loc_energy, iteration)
+        else:
+            print(loc, loc_energy, iteration)
 
 
 def main():
