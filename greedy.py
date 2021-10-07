@@ -6,8 +6,8 @@ Class: CSCI 4350
 Instructor: Dr. Joshua Phillips
 Description: Module for performing gradient ascent.
 
-Bash command for getting 1600 data items (16 arg combos * 100 random seeds):
-for ((i=0; i<100; i++)); do while read line; do python greedy.py $i $line --print_last_only True --print_total_iterations True; done < combos.txt >> ${i}_out.txt; done | xargs -L 1 -I CMD -P 16 bash -c CMD
+For debugging only:
+for ((i=0; i<100; i++)); do while read line; do python greedy.py $i $line --print_last_only True; done < combos.txt >> ${i}_out.txt; done | xargs -L 1 -I CMD -P 16 bash -c CMD
 """
 
 import argparse
