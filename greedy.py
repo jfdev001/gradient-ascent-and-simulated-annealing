@@ -121,6 +121,12 @@ def cli(description):
         type=int,
         default=1)
 
+    parser.add_argument(
+        '--iter_threshold',
+        help='max number of iterations before termination. (default: 100000)',
+        type=int,
+        default=100000)
+
     logging = parser.add_argument_group(
         'logging',
         'params for logging outputs.')
@@ -172,6 +178,7 @@ def main():
     gradient_ascent(
         rand_vector, sog,
         step_size=args.step_size,
+        iter_threshold=args.iter_threshold,
         print_last_only=bool(strtobool(args.print_last_only)),
         print_total_iterations=bool(
             strtobool(args.print_total_iterations))),

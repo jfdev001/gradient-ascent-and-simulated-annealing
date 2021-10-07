@@ -118,7 +118,7 @@ def main():
 
     # Perform gradient ascent
     simulated_annealing(
-        rand_vector, sog,
+        rand_vector, sog, iter_threshold=args.iter_threshold,
         print_last_only=bool(strtobool(args.print_last_only)),
         print_total_iterations=bool(
             strtobool(args.print_total_iterations))),
