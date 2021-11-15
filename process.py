@@ -1,9 +1,13 @@
-"""Module for getting number of times sa outperformed or tied greedy."""
+"""Module for getting number of times sa outperformed or tied greedy.
+
+Criteria for outperforming is called "g" and is the height that 
+the optimization algorithms reached in the multivariate Gaussian
+space.
+"""
 
 import argparse
 import os
 import pandas as pd
-import numpy as np
 
 
 def cli(description):

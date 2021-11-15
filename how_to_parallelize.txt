@@ -1,1 +1,0 @@
-Use parallelize.bash in ola1 zip

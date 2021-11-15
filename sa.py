@@ -8,9 +8,7 @@ Description: Module for performing simulated annealing.
 """
 
 from distutils.util import strtobool
-
 import numpy as np
-
 from greedy import random_location, cli
 from SumofGaussians import SumofGaussians
 
@@ -67,6 +65,8 @@ def simulated_annealing(
         temp = annealing_schedule(iteration, iter_threshold)
 
         # Determine candidate move
+        # TODO: Should be continuous sampling not random between 2
+        # choices!!
         candidate_loc = loc + np.random.choice((-0.05, 0.05))
 
         # Edge cases -- sets dim with out of bound step to max or min
