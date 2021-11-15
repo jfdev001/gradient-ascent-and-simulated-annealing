@@ -2,6 +2,8 @@
 
 Implementation of and comparison for [Hill Climbing (aka Gradient Ascent, aka greedy best first search)](https://en.wikipedia.org/wiki/Hill_climbing) and [Simulated Annealing](https://en.wikipedia.org/wiki/Simulated_annealing) on a known function space modeled by a [multivariate Gaussian distribution](https://en.wikipedia.org/wiki/Multivariate_normal_distribution).
 
+For a summary of results, see `reoprt/report.pdf`.
+
 # Installation
 
 This repository makes use of Python's scientific computing/data analysis libraries NumPy and Pandas.
